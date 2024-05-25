@@ -1,0 +1,20 @@
+{% extends "partials/admin/body.html" %}
+{% block contenido %}
+<div class="container">
+    <h1 class="my-4">Lista de Usuarios</h1>
+    
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Primer Nombre</th>
+          <th scope="col">Primer Apellido</th>
+        </tr>
+      </thead>
+      <tbody id="users-table-body">
+        <!-- Los datos de los usuarios se insertarán aquí -->
+      </tbody>
+    </table>
+  </div>
+
+{% endblock contenido %}
