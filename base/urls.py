@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from django.conf import settings
+from django.conf.urls.static import static
 
 from base.views import index_admin
 
@@ -23,4 +25,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("", index_admin, name=""),
     path("comunidad/", include("comunidad.urls")),
-]
+    path("comunidad/api/", include("comunidad.api_urls")),
+    
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

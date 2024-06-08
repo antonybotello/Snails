@@ -10,8 +10,13 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback" />
     <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}" />
     <link rel="stylesheet" href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'Plugins/toastr/toastr.min.css' %}" >
     {% bootstrap_css %}
     {% bootstrap_javascript %}
+    <!-- jQuery -->
+    <script src="{% static 'plugins\jquery\jquery.min.js' %}"></script>
+    <link href="{% static 'js\plugins\DataTables\datatables.min.css' %}" rel="stylesheet">
+    <script src="{% static 'js\plugins\DataTables\datatables.min.js' %}"></script>
   </head>
   <body class="hold-transition dark-mode sidebar-mini layout-fixed layout-navbar-fixed layout-footer-fixed">
     <div class="wrapper">
@@ -54,8 +59,7 @@
     <!-- ./wrapper -->
 
     <!-- REQUIRED SCRIPTS -->
-    <!-- jQuery -->
-    <script src="{% static 'plugins\jquery\jquery.min.js' %}"></script>
+    
 
     <!-- overlayScrollbars -->
     <script src="{% static 'plugins\overlayScrollbars\js\OverlayScrollbars.min.js' %}"></script>
@@ -67,7 +71,24 @@
     <!-- ChartJS -->
     <script src="{% static 'plugins\chart.js\Chart.min.js' %}"></script>
 
-    <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
-    <script src="{% static 'js\adminlte\pages\dashboard2.js' %}"></script>
+    <script src="{% static 'plugins\toastr\toastr.min.js' %}"></script>
+
+    <!-- AdminLTE dashboard demo (This is only for demo purposes) 
+    <script src="{% static 'js\adminlte\pages\dashboard2.js' %}"></script>-->
+
+    {% if messages %}
+    {% for message in messages %}
+    <script>
+        // In your Javascript (external .js resource or <script> tag)
+        
+        toastr.{{ message.tags }}('{{ message|safe }}', '', {
+            closeButton: true,
+            progressBar: true,
+            positionClass: 'toast-bottom-right'
+        });
+    </script>
+    {% endfor %}
+    {% endif %}
+
   </body>
 </html>

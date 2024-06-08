@@ -18,8 +18,11 @@ from django.contrib import admin
 from django.urls import path
 
 from base.views import index_admin
-from comunidad.views import usuario_list_view
+from comunidad.views import *
 
 urlpatterns = [
-    path("usuarios/", usuario_list_view, name="usuarios-listar")
+    path("usuarios/", usuario_list_view, name="usuarios-listar"),
+    path("usuarios/<int:id>/", usuario_list_view, name="usuarios-editar"),
+    path("usuarios/eliminar/<int:id>/", usuario_delete_view, name="usuario-eliminar"),
+    
 ]
