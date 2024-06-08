@@ -33,6 +33,8 @@
       </div>
     </div>
   </div>
+{% endblock %}
+{% block scripts %}
   <script>
     $(document).ready(function () {
       if ($('#confirmEliminar').length) {
@@ -47,12 +49,13 @@
         success: function (data) {
           var usersTableBody = $('#users-table-body')
           data.forEach(function (user) {
-            var estado = user.estado ? 'Activo' : 'Inactivo'
+            if(user.estado){
             var imagen = user.imagen ? '<img src="' + user.imagen + '" alt="Imagen de ' + user.primer_nombre + '" width="50">' : 'No disponible'
             var editButton = '<a href="/comunidad/usuarios/' + user.id + '/" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="Editar"><i class="fas fa-pencil-alt"></i></a>'
-            var deleteButton = '<button type="button" class="btn btn-danger btnEliminar" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-bs-titulo="Usuario" data-bs-nombre="' + user.primer_nombre + '" data-bs-url="/usuarios/eliminar/' + user.id + '/">              <i class="fas fa-trash-alt"></i>            </button>'
+            var deleteButton = '<button type="button" class="btn btn-danger" id="btnEliminar" data-bs-toggle="modal" data-bs-target="#staticBackdrop" data-bs-titulo="Usuario" data-bs-nombre="' + user.primer_nombre + '" data-bs-url="/comunidad/usuarios/eliminar/' + user.id + '/">              <i class="fas fa-trash-alt"></i>            </button>'
     
             usersTableBody.append('<tr>' + '<td>' + imagen + '</td>' + '<td>' + user.primer_nombre + ' ' + user.primer_apellido + ' ' + user.segundo_apellido + '</td>' + '<td>' + user.fecha_nacimiento + '</td>' + '<td>' + user.correo + '</td>' + '<td>' + user.tipo_documento + '</td>' + '<td>' + user.documento + '</td>' + '<td id="contenedorBotones">' + editButton + ' ' + deleteButton + '</td>' + '</tr>')
+          }
           })
           $('#usuarios-table').DataTable({
             buttons: ['copy', 'csv', 'excel', 'pdf', 'print', 'colvis'],
@@ -66,11 +69,24 @@
         error: function () {
           alert('Error al cargar los datos de los usuarios.')
         }
-      })
-      
-      $('.btnEliminar').click(function() {
-        alert('Botón Eliminar clickeado');
+        
+      });
+      $("body").on('click', '#btnEliminar', function(event) {
+        
+         // Obtener el valor de data-bs-url del botón
+         var urlEliminar = $(this).data('bs-url');
+          var usuario= $(this).data('bs-nombre');
+         // Modificar el atributo href del enlace dentro del modal
+         $('#confirmEliminar').attr('href', urlEliminar);
+         $('#usuarioNombre').text(usuario);
+        event.preventDefault();
       });
     })
+  </script>
+  <script>
+    
+    $(document).ready(function() {
+      
+    });
   </script>
 {% endblock %}

@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}" />
     <link rel="stylesheet" href="{% static 'plugins/overlayScrollbars/css/OverlayScrollbars.min.css' %}" />
     <link rel="stylesheet" href="{% static 'Plugins/toastr/toastr.min.css' %}" >
+    <link rel="shortcut icon" type="image/x-icon" href="{% static 'img/favicon.png' %}">
     {% bootstrap_css %}
     {% bootstrap_javascript %}
     <!-- jQuery -->
@@ -90,5 +91,6 @@
     {% endfor %}
     {% endif %}
 
+    {% block scripts %}{% endblock scripts %}
   </body>
 </html>

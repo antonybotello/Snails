@@ -74,6 +74,6 @@ def usuario_list_view(request,id=None):
 
 
 def usuario_delete_view(request,id):
-    usuario= Usuario.objects.get(id=id)
-    usuario.delete()
+    usuario= Usuario.objects.filter(id=id)
+    usuario.update(estado=False)
     return redirect('usuarios-listar')
