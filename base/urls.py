@@ -18,12 +18,19 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.views import LoginView
 
-from base.views import index_admin
+from base.views import index_admin, index_user, logout_user
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path("", index_admin, name=""),
+    path('admin-django/', admin.site.urls),
+    path("admin/", index_admin, name="index-admin"),
+    path("", index_user, name="index-user"),
+    
+    path("login/", LoginView.as_view(), name="login"),
+    path("logout/", logout_user, name="logout"),
+    path('', include('django.contrib.auth.urls')),
+    
     path("comunidad/", include("comunidad.urls")),
     path("comunidad/api/", include("comunidad.api_urls")),
     path("servicios/", include("servicios.urls")),
