@@ -52,7 +52,13 @@
                     <div class="d-flex align-items-center flex-nowrap pt-xl-0">
                         <button class="btn-search btn btn-primary btn-primary-outline-0 rounded-circle btn-lg-square" data-bs-toggle="modal" data-bs-target="#searchModal"><i class="fas fa-search"></i></button>
                         <a href="appointment.html" class="btn btn-primary btn-primary-outline-0 rounded-pill py-3 px-4 ms-4">Book Appointment</a>
+
+                        {% if not user.is_authenticated %}
                         <a href="{% url "login" %}" class="btn btn-primary btn-primary-outline-0 rounded-pill py-3 px-4 ms-4">Acceder</a>
+                        {% else %}
+                        <p href="#" class="m-4 h2">Bienvenido {{ user.first_name }}!</p>
+                        {% endif %}
+                        
 
                     </div>
                 </div>

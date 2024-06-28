@@ -18,7 +18,7 @@ from django.contrib import admin
 from django.urls import include, path
 from django.conf import settings
 from django.conf.urls.static import static
-from django.contrib.auth.views import LoginView
+from django.contrib.auth.views import LoginView, PasswordResetView,PasswordResetDoneView,PasswordResetConfirmView,PasswordResetCompleteView
 
 from base.views import index_admin, index_user, logout_user
 
@@ -30,6 +30,11 @@ urlpatterns = [
     path("login/", LoginView.as_view(), name="login"),
     path("logout/", logout_user, name="logout"),
     path('', include('django.contrib.auth.urls')),
+    path('reiniciar/',PasswordResetView.as_view(),name='pass_reset'),
+    path('reiniciar/enviar',PasswordResetDoneView.as_view(),name='pass_reset_done'),
+    path('reiniciar/<uid64>/<token>',PasswordResetConfirmView.as_view(),name='pass_reset_confirm'),
+    path('reiniciar/completo',PasswordResetCompleteView.as_view(),name='pass_reset_reset_complete'),
+    
     
     path("comunidad/", include("comunidad.urls")),
     path("comunidad/api/", include("comunidad.api_urls")),
